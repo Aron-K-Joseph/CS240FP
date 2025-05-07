@@ -1,0 +1,51 @@
+data: 
+    fizz: “fizz\n”
+	buzz: “buzz\n”
+    fizzbuzz: “fizzbuzz\n”
+instructions:
+	Fizz: 
+        ldad fizz, $r1 
+        pstr 0($r1) 
+        jmp Loop
+    Buzz:
+        ldad buzz, $r1
+        pstr 0($r1)
+        jmp Loop
+    FizzBuzz:
+        ldad fizzbuzz, $r1
+        pstr 0($r1)
+        jmp Loop
+    
+
+    cmbi $r0,0, $r0 //starting value of iterator
+    cmbi $r5,100,$r5 //the number of times the Loop is supposed to iterate
+    cmbi $r6,1,$r6
+    for  $r6,Loop // to run the loop section
+    Loop:
+        cmbi $r0,1, $r0 //incrementing the iteratir counter
+        ife $r0,$r5,End // if the iterator or count equals $r5 or 100 End section executes end ends the program
+        
+        cmbi $r2,15, $r2 //loads 15 into $r2
+        mdlo $r0,$r2,$r3 
+        ldim 0,$t4
+        ife $t3,$t4, FizzBuzz
+        
+        cmbi $r2,3, $r2
+        mdlo $r0,$r2,$r3
+        ldim 0,$t4
+        ife $t3,$t4, Fizz
+
+        cmbi $r2,5, $r2
+        mdlo $r10,$r2,$r3
+        ldim 0,$t4
+        ife $t3,$t4, Buzz
+        
+        pint $r0
+    
+
+
+
+
+    End:
+        end
+

@@ -1,0 +1,39 @@
+data: 
+    FizzBuzz: "FizzBuzz\n"
+    Fizz: "Fizz\n"
+    Buzz: "Buzz\n"
+instructions: 
+    FizzBuzz:
+        ldad FizzBuzz, %r0
+        pstr  0(%r0)
+        jmp Loop
+    Fizz:
+        ldad Fizz, %r0
+        pstr  0(%r0)
+        jmp Loop
+    Buzz:
+        ldad Buzz, %r0
+        pstr  0(%r0)
+        jmp Loop
+    cmbi %r1,1, %r1
+    cmbi %r2,100, %r2
+    cmbi %r3,1, %r3
+    for  %r3,Loop
+    Loop:
+        cmbi %r1,1,%r1
+        ife %r1,%r2,End
+        cmbi %r3, 15, %r3
+        mdlo %r1,%r3, %r4
+        ldim 0,%r5
+        ife %r4,%r5,FizzBuzz
+        cmbi %r3, 3, %r3
+        mdlo %r1,%r3, %r4
+        ldim 0,%r5
+        ife %r4,%r5,Fizz
+        cmbi %r3, 5, %r3
+        mdlo %r1,%r3, %r4
+        ldim 0,%r5
+        ife %r4,%r5,Buzz
+        pint %r1
+    End:
+        end
